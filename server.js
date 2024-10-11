@@ -4,6 +4,8 @@ const mongodb = require('./data/database.js');
 
 const port = 3000;
 
+app.use('/', require('./routes')); //Routes
+
 // Server Start
 mongodb.initDb((err, mongodb) => {
   if (err) {
