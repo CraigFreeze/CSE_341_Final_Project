@@ -3,6 +3,6 @@ const routes = express.Router();
 
 const classController = require('../controllers/classController.js')
 
-// routes.get('/', classController.getSingle(''))
+// routes.get('/', classController.getOne(''))
 
 module.exports = routes;

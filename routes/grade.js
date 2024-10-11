@@ -3,6 +3,6 @@ const routes = express.Router();
 
 const gradeController = require('../controllers/gradeController.js')
 
-// routes.get('/', gradeController.getSingle(''))
+// routes.get('/', gradeController.getOne(''))
 
 module.exports = routes;

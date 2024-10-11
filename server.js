@@ -1,10 +1,12 @@
 const express = require('express');
 const app = express();
 const mongodb = require('./data/database.js');
+const bodyParser = require('body-parser')
 
 const port = 3000;
 
-app.use('/', require('./routes')); //Routes
+app.use(bodyParser.json())
+    .use('/', require('./routes')); //Routes
 
 // Server Start
 mongodb.initDb((err, mongodb) => {

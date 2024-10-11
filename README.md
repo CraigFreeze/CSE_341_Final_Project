@@ -17,9 +17,9 @@ npm install swagger-ui-express --save-dev
 
 ## Links
 
-[Github](https://github.com/CraigFreeze/CSE_341_Final_Project).
-[Render](https://render.com).
-[Youtube](https://youtube.com).
+- [Github](https://github.com/CraigFreeze/CSE_341_Final_Project).
+- [Render](https://render.com).
+- [Youtube](https://youtube.com).
 
 ## Individual Contributions
 
@@ -30,7 +30,10 @@ Craig Freeze
 1. Set up database
 1. Populate Database with filler data
 1. Set up file organization
-1. Distribute .env to group
+1. Distribute Project information to group including .env information (database URL)
+1. Set up getOne teacher (controller, and route)
+1. Set up getAll teacher (controller, and route)
+
 
 Jan Zander
 1.

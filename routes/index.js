@@ -1,7 +1,10 @@
 const routes = require('express').Router();
 
+// Base URL
+routes.get('/', (req, res) => {
+    res.send("School GradeBook API")
+});
 
-routes.get('/', res.send("School Grade Book API"));
 routes.use('/student', require('./student.js'))
 routes.use('/teacher', require('./teacher.js'))
 routes.use('/class', require('./class.js'))
