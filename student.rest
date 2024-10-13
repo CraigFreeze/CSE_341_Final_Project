@@ -1,0 +1,33 @@
+#GET students
+# GET http://localhost:3000/student
+
+# GET student 
+# GET http://localhost:3000/student/67099586204dafb2be0993cc
+
+
+# Post new student 
+# POST http://localhost:3000/student HTTP/1.1
+# content-type: application/json
+
+# {
+#     "first_name": "Hideki ",
+#     "last_name": "Ryuga",
+#     "enrolled_classes": [
+#         "class10",
+#         "class20"
+#     ],
+#     "date_of_birth": "1979-10-31",
+#     "address": "1407 Graymalkin Ln, North Salem, NY, 10560",
+#     "grade_level": 10,
+#     "home_room_teacher": "teacher10"
+# }
+
+# new student
+# 670b5bfe0fb17a549a6f9566
+
+
+# IMPORTANT!!!
+# delete students
+# thise information needed to be deleted it was added incorrectly
+# 670b5e388084a9f47a8a1cd1
+# 670b5f9506480b7ef48ad912
