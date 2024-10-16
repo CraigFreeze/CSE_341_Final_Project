@@ -44,8 +44,9 @@ Ntombi Hontyo
 1.
 
 Josue Sinaca Gomez 
-1.
-1.
+1. GET single and all for student and class (route and controller)
+1. POST for student, class, and teacher (router and controller)
+1. class, student, and techer file (rest file) was created to test GET (single and all) and POST
 
 Kami Smith 
 1.

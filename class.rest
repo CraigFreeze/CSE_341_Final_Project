@@ -1,0 +1,21 @@
+#GET classes
+# GET http://localhost:3000/class
+
+# GET class
+# GET http://localhost:3000/class/67099506204dafb2be099394
+
+
+# Post new class 
+# POST http://localhost:3000/class HTTP/1.1
+# content-type: application/json
+
+# {
+#     "course_code": "ASTRO101",
+#     "subject": "Astronomy",
+#     "class_description": "Introduction to Astronomy",
+#     "max_class_size": 40
+# }
+
+# new class added 
+# 670b58c00fb17a549a6f9565
+

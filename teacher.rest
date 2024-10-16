@@ -1,0 +1,28 @@
+#GET teachers
+# GET http://localhost:3000/teacher
+
+# GET teacher 
+# GET http://localhost:3000/teacher/670995b1204dafb2be0993ea
+
+# Post new teacher (ADD)
+# POST http://localhost:3000/teacher HTTP/1.1
+# content-type: application/json
+
+# {
+#     "first_name": "Charles",
+#     "last_name": "Xavier",
+#     "subject": "Mathematics",
+#     "classes": [
+#       "class20",
+#       "class30"
+#     ]
+# }
+
+# new teacher
+# 670b60b5d28e26752aeae59f
+
+
+# IMPORTANT!!!
+# this needed to be deleted, it was added to student database
+# 670b5e388084a9f47a8a1cd1
+# 670b5f9506480b7ef48ad912

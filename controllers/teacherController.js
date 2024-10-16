@@ -22,6 +22,25 @@ const getOne = () => {
     }
 }
 
+const createTeacher = async (req, res, next) => {
+    if (!req.body) {
+        res.status(400).send();
+        return;
+    }
+    const newTeacher = {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        subject: req.body.subject,
+        classes: req.body.classes,
+    }
+    const response = await db.getDb().db().collection('teacher').insertOne(newTeacher);
+    if (response.acknowledged ) {
+        res.status(201).json(response);
+    } else {
+        res.status(500).json(response.error || 'Some error occurred while creating Teacher');
+    }
+}
+
 module.exports = {
-    getOne, getAll
+    getOne, getAll, createTeacher,
 }
