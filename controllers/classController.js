@@ -44,4 +44,32 @@ classController.createClass = async (req, res, next) => {
         res.status(500).json(response.error || 'Some error occurred while creating Class');
     }
 }
+
+classController.updateClass =  async (req, res, next) => {
+    const classId = new ObjectId(req.params.id);
+    const updatedclass = {
+        course_code: req.body.course_code,
+        subject: req.body.subject,
+        class_description: req.body.class_description,
+        max_class_size: req.body.max_class_size,
+    };
+    const response = await db.getDb().db().collection('class').replaceOne({_id: classId}, updatedclass);
+    if (response.modifiedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occured while updating the class');
+    }
+};
+
+classController.deleteClass =  async (req, res, next) => {
+    const classId = new ObjectId(req.params.id);
+    const response = await db.getDb().db().collection('class').deleteOne({_id: classId});
+    if (response.deletedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occured while deleting the class');
+    }
+}
+
+
 module.exports = classController;
