@@ -1,9 +1,14 @@
 #GET students
-# GET http://localhost:3000/student
+GET http://localhost:3000/student
 
 # GET student 
 # GET http://localhost:3000/student/67099586204dafb2be0993cc
 
+# GET FisrtName
+# GET http://localhost:3000/student/findByFirstName/Jane
+
+# GET No user found 
+# GET http://localhost:3000/student/findByFirstName/Jann
 
 # Post new student 
 # POST http://localhost:3000/student HTTP/1.1
@@ -21,6 +26,25 @@
 #     "grade_level": 10,
 #     "home_room_teacher": "teacher10"
 # }
+
+#  PUT http://localhost:3000/student/67099586204dafb2be0993d4 HTTP/1.1
+# content-type: application/json
+
+# {
+# 	"first_name": "Felix",
+#     "last_name": "Martinez",
+#     "enrolled_classes": [
+#       "class1",
+#       "class2"
+#     ],
+#     "date_of_birth": "2008-01-11",
+#     "address": "220 Maple Ct, Metropolis, NY, 10006",
+#     "grade_level": 9,
+#     "home_room_teacher": "teacher9"
+# }
+
+# DELETE 
+# DELETE http://localhost:3000/student/
 
 # new student
 # 670b5bfe0fb17a549a6f9566

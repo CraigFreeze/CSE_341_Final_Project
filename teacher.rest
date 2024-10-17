@@ -4,6 +4,12 @@
 # GET teacher 
 # GET http://localhost:3000/teacher/670995b1204dafb2be0993ea
 
+#GET by name
+# GET http://localhost:3000/teacher/name/James
+
+#GET by name not found
+GET http://localhost:3000/teacher/name/Jam
+
 # Post new teacher (ADD)
 # POST http://localhost:3000/teacher HTTP/1.1
 # content-type: application/json

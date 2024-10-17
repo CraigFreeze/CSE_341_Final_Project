@@ -1,0 +1,28 @@
+#GET classes
+# GET http://localhost:3000/grade
+
+# GET grade
+# GET http://localhost:3000/grade/67099593204dafb2be0993d9
+
+# GET StudentId
+GET http://localhost:3000/grade/student/student1
+
+# GET subject
+# GET http://localhost:3000/grade/subject/Mathematics
+
+# GET no grade found
+# GET http://localhost:3000/grade/subject/Mathe
+
+# Post new grade 
+# POST http://localhost:3000/grade HTTP/1.1
+# content-type: application/json
+
+# {
+#     "course_code": "ASTRO101",
+#     "subject": "Astronomy",
+#     "class_description": "Introduction to Astronomy",
+#     "max_class_size": 40
+# }
+
+# new class added 
+# 670b58c00fb17a549a6f9565
