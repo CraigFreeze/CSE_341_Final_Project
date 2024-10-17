@@ -47,6 +47,20 @@ Josue Sinaca Gomez
 1. GET single and all for student and class (route and controller)
 1. POST for student, class, and teacher (router and controller)
 1. class, student, and techer file (rest file) was created to test GET (single and all) and POST
+1. GET /student/findByFistName/:firstName
+1. GET /student/findByLastName/:lastName
+1. GET /class/subject/:subject
+1. GET /teacher/name/:name
+1. GET /teacher/login
+1. GET /teacher/logout
+1. GET /teacher/github/callback
+1. GET /grade/:gradeID
+1. GET /grade/student/:studentId
+1. grade.rest to test the endpoints
+1. PUT /student/:studentId
+1. DELETE /student/:studentId
+1. PUT /class/:classId
+1. DELETE /class/:classId
 
 Kami Smith 
 1.
