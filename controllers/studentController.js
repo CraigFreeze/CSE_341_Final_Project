@@ -24,6 +24,7 @@ student.getOne = () => {
         });
     }
 }
+
 student.findByFirstName = () => {
     //#swagger.tags=['Student']
     try {
