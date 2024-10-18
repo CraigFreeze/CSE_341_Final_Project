@@ -3,12 +3,11 @@
   "info": {
     "title": "Gradebook Api",
     "description": "Gradebook Api",
-    "version": "1.0.0"
+    "version": "1.2.0"
   },
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https",
     "http"
   ],
   "paths": {

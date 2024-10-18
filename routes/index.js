@@ -2,15 +2,18 @@ const routes = require('express').Router();
 const passport = require("passport");
 routes.use("/", require("./swagger.js"));
 
-// Base URL
-routes.get('/', (req, res) => {
-    res.send("School GradeBook API")
-});
+// // Base URL
+// routes.get('/', (req, res) => {
+//     res.send("School GradeBook API")
+// });
 
 routes.use('/student', require('./student.js'))
 routes.use('/teacher', require('./teacher.js'))
 routes.use('/class', require('./class.js'))
 routes.use('/grade', require('./grade.js'))
+
+
+routes.get('/',(req,res)=> {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.username}` : "Logged Out of School GradeBook API")});
 
 
 // GitHub authentication route
