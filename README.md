@@ -37,6 +37,12 @@ Craig Freeze
 1. Set up getOne teacher (controller, and route)
 1. Set up getAll teacher (controller, and route)
 
+Arnold Sujan Katru
+1.Add login route
+2.Add log out route
+3.Develop authenticate.js
+4.Update server.js to be compatible with OAuth
+5.Update local .env to have client secret and client ID
 
 Jan Zander
 1. Validation for all routes
