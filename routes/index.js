@@ -12,4 +12,42 @@ routes.use('/teacher', require('./teacher.js'))
 routes.use('/class', require('./class.js'))
 routes.use('/grade', require('./grade.js'))
 
+
+// GitHub authentication route
+router.get("/auth/github", passport.authenticate("github", { scope: ["user:email"] }));//,session:false reauthentication
+
+// GitHub callback route
+router.get(
+  "/auth/github/callback",
+  passport.authenticate("github", { failureRedirect: "/" }),//,session:false reauthentication
+  (req, res) => {
+    // Successful authentication
+    req.session.user = req.user; //uncomment if doesnt callbackproperly
+    res.redirect("/profile");
+  }
+);
+
+// Profile route (only accessible when authenticated)
+router.get("/profile", (req, res) => {
+    if (!req.isAuthenticated()) { //(!req.isAuthenticated)
+      res.send("Please login to continue.");  // Show logout message
+      return res.redirect("/");
+    }
+    res.send(`Hello, ${req.user.displayName}`);
+  });
+  
+  // Logout route (show message "Logged out" after successful logout)
+  router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+      if (err) return next(err);  // Handle any errors during logout
+  
+      // Destroy the session
+      req.session.destroy((err) => {
+        if (err) return next(err);  // Handle any session destruction errors
+        res.clearCookie('connect.sid');  // Clears the session cookie
+        res.send("You have successfully logged out.");  // Show logout message
+      });
+    });
+  });
+
 module.exports = routes;
