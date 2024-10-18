@@ -99,6 +99,6 @@ const deleteTeacher = async (req, res, next) => {
 module.exports = {
 
 
-    getOne, getAll, createTeacher, getByName, updateTeacher, deleteTeacher
+    getOne, getAll, createTeacher, getByFirstName, updateTeacher, deleteTeacher
 
 }
