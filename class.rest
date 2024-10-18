@@ -1,9 +1,14 @@
 #GET classes
-# GET http://localhost:3000/class
+# GET http://localhost:3000/class/
 
 # GET class
 # GET http://localhost:3000/class/67099506204dafb2be099394
 
+# GET subject
+# GET http://localhost:3000/class/subject/Mathematics
+
+# GET no class found
+# GET http://localhost:3000/class/subject/Mathe
 
 # Post new class 
 # POST http://localhost:3000/class HTTP/1.1
@@ -15,6 +20,20 @@
 #     "class_description": "Introduction to Astronomy",
 #     "max_class_size": 40
 # }
+
+# update class 
+# PUT http://localhost:3000/class/670b58c00fb17a549a6f9565 HTTP/1.1
+# content-type: application/json
+
+# {
+#     "course_code": "ASTRO101",
+#     "subject": "Astronomy",
+#     "class_description": "Introduction to Astronomy",
+#     "max_class_size": 45
+# }
+
+# DELETE 
+# DELETE http://localhost:3000/class/
 
 # new class added 
 # 670b58c00fb17a549a6f9565

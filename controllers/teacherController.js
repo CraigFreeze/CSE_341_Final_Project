@@ -22,6 +22,28 @@ const getOne = () => {
     }
 }
 
+const getByName = () => {
+    try {
+        return async (req, res) => {
+            const firstName = req.params.name.toLowerCase();
+            const result = await db.getDb().db().collection('teacher').find();
+            result.toArray().then((contacts) => {
+                res.setHeader('Content-Type', 'application/json');
+                var found = [];
+                contacts.map((contact) => {if (contact.first_name.toLowerCase() == firstName) found.push(contact)});
+                if (found.length > 0) {
+                    res.status(200).json(found);
+                } else {
+                    res.status(200).send('No teachers were found');
+                }
+            });
+        }
+    } catch {
+        return res.status(500).send('Some error occurred while tring to find teacher by first name');
+    }
+}
+
+
 const createTeacher = async (req, res, next) => {
     if (!req.body) {
         res.status(400).send();
@@ -69,5 +91,8 @@ const deleteTeacher = async (req, res, next) => {
 
 
 module.exports = {
-    getOne, getAll, createTeacher, updateTeacher, deleteTeacher
+
+
+    getOne, getAll, createTeacher, getByName, updateTeacher, deleteTeacher
+
 }

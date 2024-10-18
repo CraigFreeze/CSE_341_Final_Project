@@ -14,6 +14,40 @@ gradeController.getAll = () => {
     }
 };
 
+gradeController.getGradeId = () => {
+    //#swagger.tags=['Grade']
+    return async (req, res) => {
+        const id = new ObjectId(req.params.grade)
+        const result = await db.getDb().db().collection('grade').find({ _id: id });
+        result.toArray().then((grades) => {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(grades[0]);
+        });
+    }
+}
+
+gradeController.getStudentId = () => {
+    //#swagger.tags=['Grade']
+    try {
+        return async (req, res) => {
+            const studentId = req.params.studentId;
+            const result = await db.getDb().db().collection('grade').find({ student_id: studentId });
+            result.toArray().then((grades) => {
+                res.setHeader('Content-Type', 'application/json');
+                var found = [];
+                grades.map((grade) => {if (grade.student_id == studentId) found.push(grade)});
+                if (found.length > 0) {
+                    res.status(200).json(found);
+                } else {
+                    res.status(200).send('Student Id not found');
+                }
+            });
+        }
+    } catch {
+        return res.status(500).send('Some error occurred while tring to find student ID');
+    }
+}
+
 gradeController.createGrade = async (req, res, next) => {
     //#swagger.tags=['Grade']
     if (!req.body) {
