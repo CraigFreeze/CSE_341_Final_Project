@@ -43,8 +43,8 @@ Jan Zander
 1.
 
 Ntombi Hontyo
-1.
-1.
+1. PUT endpoints for all collections
+1. DELETE endpoints for all collections
 
 Josue Sinaca Gomez 
 1. GET single and all for student and class (route and controller)

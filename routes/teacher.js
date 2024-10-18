@@ -16,6 +16,7 @@ routes.get('/name/:name', teacherController.getByName())
 // 		req.session.user = req.user;
 // 		res.redirect('/')});
 routes.post('/', teacherController.createTeacher)
-
+routes.put('/:id', teacherController.updateTeacher)
+routes.delete('/:id', teacherController.deleteTeacher)
 
 module.exports = routes;

@@ -92,6 +92,9 @@ student.createStudent = async (req, res, next) => {
     }
 }
 
+
+
+
 student.updateStudent = async (req, res, next) => {
     //#swagger.tags=['Student']
     const studentId = new ObjectId(req.params.studentId);
@@ -99,6 +102,7 @@ student.updateStudent = async (req, res, next) => {
         return res.status(400).send({message: 'Data to update cannot be empty'});
     }
     const update = ({
+
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         enrolled_classes: req.body.enrolled_classes,
@@ -106,6 +110,8 @@ student.updateStudent = async (req, res, next) => {
         address: req.body.address,
         grade_level: req.body.grade_level,
         home_room_teacher: req.body.home_room_teacher,
+
+
     })
     const response = await db.getDb().db().collection('student').replaceOne({_id: studentId}, update)
     if (response.modifiedCount > 0) {
@@ -129,4 +135,5 @@ student.deleteStudent = async (req, res, next) => {
         res.status(204).send();
     })
 }
+
 module.exports = student;

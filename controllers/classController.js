@@ -66,6 +66,10 @@ classController.createClass = async (req, res, next) => {
     }
 }
 
+
+
+
+
 classController.updateClass = async (req, res, next) => {
     //#swagger.tags=['Class']
     const classId = new ObjectId(req.params.classId);
@@ -100,4 +104,5 @@ classController.deleteClass = async (req, res, next) => {
         res.status(204).send();
     })
 }
+
 module.exports = classController;

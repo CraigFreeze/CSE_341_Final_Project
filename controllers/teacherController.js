@@ -63,6 +63,36 @@ const createTeacher = async (req, res, next) => {
     }
 }
 
+const updateTeacher = async (req, res, next) => {
+    const teacherId = new ObjectId(req.params.id);
+    const updatedteacher = {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        subject: req.body.subject,
+        classes: req.body.classes,
+    };
+    const response = await db.getDb().db().collection('teacher').replaceOne({_id: teacherId}, updatedteacher);
+    if (response.modifiedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occured while updating the teacher');
+    }
+};
+
+const deleteTeacher = async (req, res, next) => {
+    const teacherId = new ObjectId(req.params.id);
+    const response = await db.getDb().db().collection('teacher').deleteOne({_id: teacherId});
+    if (response.deletedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some error occured while deleting the teacher');
+    }
+}
+
+
 module.exports = {
-    getOne, getAll, createTeacher, getByName
+
+
+    getOne, getAll, createTeacher, getByName, updateTeacher, deleteTeacher
+
 }
