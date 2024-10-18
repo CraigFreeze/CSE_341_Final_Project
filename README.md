@@ -39,8 +39,8 @@ Craig Freeze
 
 
 Jan Zander
-1.
-1.
+1. Validation for all routes
+1. swagger ui
 
 Ntombi Hontyo
 1. PUT endpoints for all collections
