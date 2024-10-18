@@ -21,7 +21,7 @@ app.use(
     secret: "yourSecretKey",  // A strong secret for session encryption
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: process.env.NODE_ENV === "production" } // Comment this when live on render
+    // cookie: { secure: process.env.NODE_ENV === "production" } // Comment this when live on render
     // cookie: { secure: false }
 
   })
