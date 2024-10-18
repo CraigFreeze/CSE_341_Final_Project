@@ -9,8 +9,6 @@ const mongodb = require('./data/database.js');
 
 const port = process.env.PORT || 3000;
 
-// const port = 3000;
-
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -33,30 +31,32 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(bodyParser.json())
-    .use((req, res, next) => {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader(
-          "Access-Control-Allow-Origin",
-          "Origin, X-Requested-With, Content-Type, Accept, Z-Key"
-      );
-      res.setHeader("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, OPTIONS");
-      next();
-    });
-    // .use('/', require('./routes/index.js')); //Routes
-
-
-app.use('/', require('./routes/index.js'));
+app.use(bodyParser.json());
 
 // Server Start
-mongodb.initDb((err, mongodb) => {
+// Initialize MongoDB and start server
+mongodb.initDb((err, db) => {
   if (err) {
     console.log(err);
   } else {
-    app.listen(process.env.port || port);
-    console.log(`Connected to DB and listening on ${process.env.port || 3000}`);
+    app.listen(port, () => {
+      console.log(`Connected to DB and listening on port ${port}`);
+    });
   }
 });
+
+// Set headers *before* the routes
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Z-Key");
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
+
+app.use('/', require('./routes/index.js'));
+
+
 
 // Error handling
 app.use((err, req, res, next) => {

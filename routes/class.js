@@ -10,8 +10,8 @@ const { isAuthenticated } = require('../middleware/authenticate');
 routes.post('/',isAuthenticated, validation.classCreateValidationRules(), validation.validate, classController.createClass);
 
 //R
-routes.get('/', isAuthenticated,classController.getAll);
-routes.get('/:id',isAuthenticated, classController.getOne);
+routes.get('/', classController.getAll());
+routes.get('/:id',isAuthenticated, classController.getOne());
 routes.get('/subject/:subject',isAuthenticated, validation.classBySubjectValidationRules(), validation.validate, classController.getSubject());
 
 //U

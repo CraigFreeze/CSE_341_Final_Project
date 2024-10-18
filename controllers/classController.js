@@ -10,11 +10,11 @@ classController.getAll = () => {
       const db = mongodb.getDb();
         const result = await db.collection('class').find();
         result.toArray().then((contacts) => {
-            res.setHeader('Content-Type', 'application/json');
+            // res.setHeader('Content-Type', 'application/json');
             res.status(200).json(contacts);
         });
     }
-}
+};
 
 classController.getOne = () => {
     //#swagger.tags=['Class']
