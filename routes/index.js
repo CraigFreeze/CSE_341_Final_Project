@@ -11,6 +11,8 @@ routes.use('/student', require('./student.js'))
 routes.use('/teacher', require('./teacher.js'))
 routes.use('/class', require('./class.js'))
 routes.use('/grade', require('./grade.js'))
+routes.use("/", require("./swagger"));  // Assuming this serves the Swagger API documentation
+
 
 
 routes.get('/',(req,res)=> {res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.username}` : "Logged Out of School GradeBook API")});
@@ -41,7 +43,7 @@ routes.get("/profile", (req, res) => {
   
   // Logout route (show message "Logged out" after successful logout)
 routes.get("/logout", (req, res, next) => {
-req.logout((err) => {
+    req.logout((err) => {
     if (err) return next(err);  // Handle any errors during logout
 
     // Destroy the session
