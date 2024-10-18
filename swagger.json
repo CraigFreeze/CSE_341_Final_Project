@@ -429,7 +429,7 @@
         }
       }
     },
-    "/teacher/name/{name}": {
+    "/teacher/name/{firstName}": {
       "get": {
         "tags": [
           "Teacher"
@@ -440,7 +440,7 @@
         ],
         "parameters": [
           {
-            "name": "name",
+            "firstName": "name",
             "in": "path",
             "required": true,
             "type": "string"
