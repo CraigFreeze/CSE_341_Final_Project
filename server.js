@@ -1,7 +1,11 @@
+const cors = require("cors");
 const express = require('express');
+const session = require("express-session");
+const bodyParser = require('body-parser');
+const passport = require("./middleware/passport"); // Passport configuration
+
 const app = express();
 const mongodb = require('./data/database.js');
-const bodyParser = require('body-parser')
 
 const port = 3000;
 
@@ -47,4 +51,19 @@ mongodb.initDb((err, mongodb) => {
     app.listen(process.env.port || port);
     console.log(`Connected to DB and listening on ${process.env.port || 3000}`);
   }
+});
+
+// Error handling
+app.use((err, req, res, next) => {
+  console.log(err)
+  err.statusCode = err.statusCode || 500;
+  err.message = err.message || "Internal Server Error";
+  res.status(err.statusCode).json({
+    message: err.message,
+  });
+});
+
+// Error handler 2
+app.use((req, res, next) => {
+  res.status(404).json({ message: "Route not found" });
 });

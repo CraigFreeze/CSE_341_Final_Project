@@ -1,5 +1,5 @@
 const routes = require('express').Router();
-
+const passport = require("passport");
 routes.use("/", require("./swagger.js"));
 
 // Base URL
@@ -14,10 +14,10 @@ routes.use('/grade', require('./grade.js'))
 
 
 // GitHub authentication route
-router.get("/auth/github", passport.authenticate("github", { scope: ["user:email"] }));//,session:false reauthentication
+routes.get("/auth/github", passport.authenticate("github", { scope: ["user:email"] }));//,session:false reauthentication
 
 // GitHub callback route
-router.get(
+routes.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/" }),//,session:false reauthentication
   (req, res) => {
@@ -28,7 +28,7 @@ router.get(
 );
 
 // Profile route (only accessible when authenticated)
-router.get("/profile", (req, res) => {
+routes.get("/profile", (req, res) => {
     if (!req.isAuthenticated()) { //(!req.isAuthenticated)
       res.send("Please login to continue.");  // Show logout message
       return res.redirect("/");
@@ -37,17 +37,17 @@ router.get("/profile", (req, res) => {
   });
   
   // Logout route (show message "Logged out" after successful logout)
-  router.get("/logout", (req, res, next) => {
-    req.logout((err) => {
-      if (err) return next(err);  // Handle any errors during logout
-  
-      // Destroy the session
-      req.session.destroy((err) => {
-        if (err) return next(err);  // Handle any session destruction errors
-        res.clearCookie('connect.sid');  // Clears the session cookie
-        res.send("You have successfully logged out.");  // Show logout message
-      });
+routes.get("/logout", (req, res, next) => {
+req.logout((err) => {
+    if (err) return next(err);  // Handle any errors during logout
+
+    // Destroy the session
+    req.session.destroy((err) => {
+    if (err) return next(err);  // Handle any session destruction errors
+    res.clearCookie('connect.sid');  // Clears the session cookie
+    res.send("You have successfully logged out.");  // Show logout message
     });
-  });
+});
+});
 
 module.exports = routes;

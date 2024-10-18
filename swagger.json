@@ -5,7 +5,7 @@
     "description": "Gradebook Api",
     "version": "1.0.0"
   },
-  "host": "cse-341-final-project-6enz.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "https",

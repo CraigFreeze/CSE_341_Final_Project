@@ -2,8 +2,12 @@ const passport = require("passport");
 const GitHubStrategy = require("passport-github2").Strategy;
 
 // Environment variables for client ID and secret
-const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
-const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+const GITHUB_CLIENT_ID = "Ov23li8qq9pyhs2s7g6Z";
+const GITHUB_CLIENT_SECRET = "d94226346c4977bb847d064b44f5ff1a91079cc9";
+
+//
+// const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+// const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
 passport.use(
   new GitHubStrategy(
