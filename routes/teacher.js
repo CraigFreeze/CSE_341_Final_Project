@@ -10,7 +10,7 @@ const validation = require("../middleware/validator.js");
 
 routes.get('/', teacherController.getAll())
 routes.get('/:id', validation.teacherFindByIdValidationRules(), validation.validate, teacherController.getOne())
-routes.get('/name/:firstName', validation.teacherFindNameValidationRules(), validation.validate, teacherController.getByFirstName())
+routes.get('/name/:name', validation.teacherFindNameValidationRules(), validation.validate, teacherController.getByName())
 
 // Pending, waiting for OAuth
 // routes.get('/login', passport.authenticate('github'), (req, res) => {});

@@ -24,11 +24,11 @@ const getOne = () => {
     }
 }
 
-const getByFirstName = () => {
+const getByName = () => {
     //#swagger.tags=['Teacher']
     try {
         return async (req, res) => {
-            const firstName = req.params.firstName.toLowerCase();
+            const firstName = req.params.name.toLowerCase();
             const result = await db.getDb().db().collection('teacher').find();
             result.toArray().then((contacts) => {
                 res.setHeader('Content-Type', 'application/json');
@@ -99,6 +99,6 @@ const deleteTeacher = async (req, res, next) => {
 module.exports = {
 
 
-    getOne, getAll, createTeacher, getByFirstName, updateTeacher, deleteTeacher
+    getOne, getAll, createTeacher, getByName, updateTeacher, deleteTeacher
 
 }
