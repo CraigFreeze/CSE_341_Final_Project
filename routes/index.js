@@ -1,5 +1,7 @@
 const routes = require('express').Router();
 
+routes.use("/", require("./swagger.js"));
+
 // Base URL
 routes.get('/', (req, res) => {
     res.send("School GradeBook API")

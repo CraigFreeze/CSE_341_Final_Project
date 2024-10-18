@@ -6,6 +6,15 @@ const bodyParser = require('body-parser')
 const port = 3000;
 
 app.use(bodyParser.json())
+    .use((req, res, next) => {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader(
+          "Access-Control-Allow-Origin",
+          "Origin, X-Requested-With, Content-Type, Accept, Z-Key"
+      );
+      res.setHeader("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, OPTIONS");
+      next();
+    })
     .use('/', require('./routes')); //Routes
 
 // Server Start

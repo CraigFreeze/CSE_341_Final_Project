@@ -4,9 +4,13 @@ const routes = express.Router();
 
 const teacherController = require('../controllers/teacherController.js')
 
+const validation = require("../middleware/validator.js");
+
+
+
 routes.get('/', teacherController.getAll())
-routes.get('/:id', teacherController.getOne())
-routes.get('/name/:name', teacherController.getByName())
+routes.get('/:id', validation.teacherFindByIdValidationRules(), validation.validate, teacherController.getOne())
+routes.get('/name/:name', validation.teacherFindNameValidationRules(), validation.validate, teacherController.getByName())
 
 // Pending, waiting for OAuth
 // routes.get('/login', passport.authenticate('github'), (req, res) => {});
@@ -15,8 +19,8 @@ routes.get('/name/:name', teacherController.getByName())
 // 	(req, res) => {	
 // 		req.session.user = req.user;
 // 		res.redirect('/')});
-routes.post('/', teacherController.createTeacher)
-routes.put('/:id', teacherController.updateTeacher)
-routes.delete('/:id', teacherController.deleteTeacher)
+routes.post('/', validation.teacherCreateValidationRules(), validation.validate, teacherController.createTeacher)
+routes.put('/:id', validation.teacherUpdateValidationRules(), validation.validate, teacherController.updateTeacher)
+routes.delete('/:id', validation.teacherDeleteByIdValidationRules(), validation.validate, teacherController.deleteTeacher)
 
 module.exports = routes;

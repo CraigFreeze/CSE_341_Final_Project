@@ -3,14 +3,17 @@ const routes = express.Router();
 
 const gradeController = require('../controllers/gradeController.js')
 
-routes.get('/', gradeController.getAll());
-routes.get('/student/:studentId', gradeController.getStudentId());
-routes.get('/:grade', gradeController.getGradeId());
+const validation = require("../middleware/validator.js");
 
-routes.post('/', gradeController.createGrade)
+
+routes.get('/', gradeController.getAll());
+routes.get('/student/:studentId', validation.gradeFindByStudentIdValidationRules(), validation.validate, gradeController.getStudentId());
+routes.get('/:grade', validation.gradeFindByIdValidationRules(), validation.validate, gradeController.getGradeId());
+
+routes.post('/',validation.gradeCreateValidationRules(), validation.validate,  gradeController.createGrade)
 // routes.get('/', gradeController.getOne(''))
-routes.put('/:id', gradeController.updateGrade)
-routes.delete('/:id', gradeController.deleteGrade)
+routes.put('/:id', validation.gradeUpdateValidationRules(), validation.validate, gradeController.updateGrade)
+routes.delete('/:id', validation.gradeDeleteByIdValidationRules(), validation.validate, gradeController.deleteGrade)
 
 
 module.exports = routes;

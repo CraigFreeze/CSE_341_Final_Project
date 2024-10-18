@@ -68,6 +68,7 @@ gradeController.createGrade = async (req, res, next) => {
 }
 
 gradeController.updateGrade =  async (req, res, next) => {
+    //#swagger.tags=['Grade']
     const gradeId = new ObjectId(req.params.id);
     const updatedgrade = {
         student_id: req.body.student_id,
@@ -83,6 +84,7 @@ gradeController.updateGrade =  async (req, res, next) => {
 };
 
 gradeController.deleteGrade =  async (req, res, next) => {
+    //#swagger.tags=['Grade']
     const gradeId = new ObjectId(req.params.id);
     const response = await db.getDb().db().collection('grade').deleteOne({_id: gradeId});
     if (response.deletedCount > 0) {

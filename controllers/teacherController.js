@@ -2,6 +2,7 @@ const db = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = () => {
+    //#swagger.tags=['Teacher']
     return async (req, res) => {
         const result = await db.getDb().db().collection('teacher').find();
         result.toArray().then((contacts) => {
@@ -12,6 +13,7 @@ const getAll = () => {
 }
 
 const getOne = () => {
+    //#swagger.tags=['Teacher']
     return async (req, res) => {
         const id = new ObjectId(req.params.id)
         const result = await db.getDb().db().collection('teacher').find({ _id: id });
@@ -23,6 +25,7 @@ const getOne = () => {
 }
 
 const getByName = () => {
+    //#swagger.tags=['Teacher']
     try {
         return async (req, res) => {
             const firstName = req.params.name.toLowerCase();
@@ -45,6 +48,7 @@ const getByName = () => {
 
 
 const createTeacher = async (req, res, next) => {
+    //#swagger.tags=['Teacher']
     if (!req.body) {
         res.status(400).send();
         return;
@@ -64,6 +68,7 @@ const createTeacher = async (req, res, next) => {
 }
 
 const updateTeacher = async (req, res, next) => {
+    //#swagger.tags=['Teacher']
     const teacherId = new ObjectId(req.params.id);
     const updatedteacher = {
         first_name: req.body.first_name,
@@ -80,6 +85,7 @@ const updateTeacher = async (req, res, next) => {
 };
 
 const deleteTeacher = async (req, res, next) => {
+    //#swagger.tags=['Teacher']
     const teacherId = new ObjectId(req.params.id);
     const response = await db.getDb().db().collection('teacher').deleteOne({_id: teacherId});
     if (response.deletedCount > 0) {
