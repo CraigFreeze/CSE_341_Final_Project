@@ -42,8 +42,11 @@ app.use(bodyParser.json())
       );
       res.setHeader("Access-Control-Allow-Origin", "GET, POST, PUT, DELETE, OPTIONS");
       next();
-    })
-    .use('/', require('./routes')); //Routes
+    });
+    // .use('/', require('./routes/index.js')); //Routes
+
+
+app.use('/', require('./routes/index.js'));
 
 // Server Start
 mongodb.initDb((err, mongodb) => {

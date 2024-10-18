@@ -1,4 +1,6 @@
-const routes = require('express').Router();
+// const routes = require('express').Router();
+const express = require('express');
+const routes = express.Router();
 const passport = require("passport");
 routes.use("/", require("./swagger.js"));
 
@@ -7,10 +9,10 @@ routes.use("/", require("./swagger.js"));
 //     res.send("School GradeBook API")
 // });
 
-routes.use('/student', require('./student.js'))
-routes.use('/teacher', require('./teacher.js'))
-routes.use('/class', require('./class.js'))
-routes.use('/grade', require('./grade.js'))
+routes.use('/student', require('./student'));
+routes.use('/teacher', require('./teacher'));
+routes.use('/class', require('./class'));
+routes.use('/grade', require('./grade'));
 routes.use("/", require("./swagger"));  // Assuming this serves the Swagger API documentation
 
 
@@ -54,5 +56,12 @@ routes.get("/logout", (req, res, next) => {
     });
 });
 });
+
+// Catch-all for 404 errors
+routes.use((req, res, next) => {
+    const error = new Error('Path Not Found');
+    error.status = 404;
+    next(error);
+  });
 
 module.exports = routes;
