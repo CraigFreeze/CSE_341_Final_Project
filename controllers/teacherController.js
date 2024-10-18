@@ -24,11 +24,11 @@ const getOne = () => {
     }
 }
 
-const getByName = () => {
+const getByFirstName = () => {
     //#swagger.tags=['Teacher']
     try {
         return async (req, res) => {
-            const firstName = req.params.name.toLowerCase();
+            const firstName = req.params.firstName.toLowerCase();
             const result = await db.getDb().db().collection('teacher').find();
             result.toArray().then((contacts) => {
                 res.setHeader('Content-Type', 'application/json');
