@@ -7,7 +7,9 @@ const passport = require("./middleware/passport"); // Passport configuration
 const app = express();
 const mongodb = require('./data/database.js');
 
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+// const port = 3000;
 
 // Middleware
 app.use(cors());
