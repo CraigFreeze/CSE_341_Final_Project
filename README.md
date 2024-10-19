@@ -40,9 +40,10 @@ Craig Freeze
 1. Set up getOne teacher (controller, and route)
 1. Set up getAll teacher (controller, and route)
 
+
+
 Arnold Sujan Katru
-##
-- [Youtube Link Week 5 Contribution](https://youtu.be/uc4x-Ytr1Rc).
+- [Youtube Link Week 5 Contribution Documentation ](https://youtu.be/uc4x-Ytr1Rc).
 ```
  Main (branch)
   |- arnold (branch for local machine)
@@ -57,13 +58,16 @@ Arnold Sujan Katru
 7. Implement authentication in routes
 8. Organize CRUD in routes 
 
+
 Jan Zander
 1. Validation for all routes
 1. swagger ui
 
+
 Ntombi Hontyo
 1. PUT endpoints for all collections
 1. DELETE endpoints for all collections
+
 
 Josue Sinaca Gomez 
 1. GET single and all for student and class (route and controller)
@@ -83,6 +87,7 @@ Josue Sinaca Gomez
 1. DELETE /student/:studentId
 1. PUT /class/:classId
 1. DELETE /class/:classId
+
 
 Kami Smith 
 1.
