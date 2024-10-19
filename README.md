@@ -38,11 +38,17 @@ Craig Freeze
 1. Set up getAll teacher (controller, and route)
 
 Arnold Sujan Katru
-1.Add login route
-2.Add log out route
-3.Develop authenticate.js
-4.Update server.js to be compatible with OAuth
-5.Update local .env to have client secret and client ID
+Main (branch)
+  |_ arnold (branch for local machine)
+  |_ arnoldrender (branch for render)
+1. Add login route
+2. Add log out route
+3. Develop authenticate.js
+4. Update server.js to be compatible with OAuth
+5. Update local .env to have client secret and client ID
+6. Update Db Initialization in controllers 
+7. Implement authentication in routes
+8. Organize CRUD in routes
 
 Jan Zander
 1. Validation for all routes
