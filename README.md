@@ -3,13 +3,16 @@
 View package.json to view requried nodeDependecies. If you need access to the environment Variables for this project, please reach out to Craig Freeze
 
 ```bash
+npm install body
 npm install body-parser
 npm install dotenv
+npm install cors
 npm install express
 npm install express-session
 npm install express-validator
 npm install mongodb
 npm install passport
+npm install passport-github2
 npm install nodemon --save-dev
 npm install swagger-autogen --save-dev
 npm install swagger-ui-express --save-dev
@@ -38,9 +41,11 @@ Craig Freeze
 1. Set up getAll teacher (controller, and route)
 
 Arnold Sujan Katru
-Main (branch)
-  |_ arnold (branch for local machine)
-  |_ arnoldrender (branch for render)
+```
+ Main (branch)
+  |- arnold (branch for local machine)
+  |- arnoldrender (branch for render)
+```
 1. Add login route
 2. Add log out route
 3. Develop authenticate.js
@@ -48,7 +53,7 @@ Main (branch)
 5. Update local .env to have client secret and client ID
 6. Update Db Initialization in controllers 
 7. Implement authentication in routes
-8. Organize CRUD in routes
+8. Organize CRUD in routes 
 
 Jan Zander
 1. Validation for all routes
