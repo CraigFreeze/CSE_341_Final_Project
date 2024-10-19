@@ -41,6 +41,8 @@ Craig Freeze
 1. Set up getAll teacher (controller, and route)
 
 Arnold Sujan Katru
+##
+- [Youtube Link Week 5 Contribution](https://youtu.be/uc4x-Ytr1Rc).
 ```
  Main (branch)
   |- arnold (branch for local machine)
