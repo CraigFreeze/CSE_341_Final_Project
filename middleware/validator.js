@@ -49,7 +49,7 @@ validation.studentUpdateValidationRules = () => {
 
 validation.studentDeleteByIdValidationRules = () => {
     return [
-        param("id").isMongoId().withMessage("Invalid ID format. Must be a valid MongoDB ObjectId")
+        param("studentId").isMongoId().withMessage("Invalid ID format. Must be a valid MongoDB ObjectId")
     ];
 }
 
@@ -129,7 +129,7 @@ validation.gradeUpdateValidationRules = () => {
 
 validation.gradeDeleteByIdValidationRules = () => {
     return [
-        param("classId").isMongoId().withMessage("Invalid ID format. Must be a valid MongoDB ObjectId")
+        param("id").isMongoId().withMessage("Invalid ID format. Must be a valid MongoDB ObjectId")
     ];
 }
 
