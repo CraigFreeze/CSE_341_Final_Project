@@ -60,8 +60,27 @@ Arnold Sujan Katru
 
 
 Jan Zander
-1. Validation for all routes
-1. swagger ui
+1. Validation for GET for teachers collection
+2. Validation for POST for teachers collection
+3. Validation for PUT for teachers collection
+4. Validation for DELETE for teachers collection
+
+5. Validation for GET for class collection
+6. Validation for POST for class collection
+7. Validation for PUT for class collection
+8. Validation for DELETE for class collection
+
+9. Validation for GET for student collection
+10. Validation for POST for student collection
+11. Validation for PUT for student collection
+12. Validation for DELETE for student collection
+
+13. Validation for GET for grade collection
+14. Validation for POST for grade collection
+15. Validation for PUT for grade collection
+16. Validation for DELETE for grade collection
+
+17. created the swagger ui
 
 
 Ntombi Hontyo
