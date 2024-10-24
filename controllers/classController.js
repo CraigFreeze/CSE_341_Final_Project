@@ -1,35 +1,41 @@
-const db = require('../data/database');
+const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 const classController = {};
+
+//Make sure to initialize .getDb before any action and do not use db as variable name.
 
 classController.getAll = () => {
     //#swagger.tags=['Class']
     return async (req, res) => {
-        const result = await db.getDb().db().collection('class').find();
+      const db = mongodb.getDb();
+        const result = await db.collection('class').find();
         result.toArray().then((contacts) => {
-            res.setHeader('Content-Type', 'application/json');
+            // res.setHeader('Content-Type', 'application/json');
             res.status(200).json(contacts);
         });
     }
-}
+};
 
 classController.getOne = () => {
     //#swagger.tags=['Class']
     return async (req, res) => {
+      const db = mongodb.getDb();
         const id = new ObjectId(req.params.id)
-        const result = await db.getDb().db().collection('class').find({ _id: id });
+        const result = await db.collection('class').find({ _id: id });
         result.toArray().then((contacts) => {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).json(contacts[0]);
         });
     }
 }
+
 classController.getSubject = () => {
     //#swagger.tags=['Class']
     try {
         return async (req, res) => {
+        const db = mongodb.getDb();
             const subject = req.params.subject.toLowerCase();
-            const result = await db.getDb().db().collection('class').find();
+            const result = await db.collection('class').find();
             result.toArray().then((clases) => {
                 res.setHeader('Content-Type', 'application/json');
                 var found = [];
@@ -58,17 +64,14 @@ classController.createClass = async (req, res, next) => {
         class_description: req.body.class_description,
         max_class_size: req.body.max_class_size,
     }
-    const response = await db.getDb().db().collection('class').insertOne(newClass);
+    const db = mongodb.getDb();
+    const response = await db.collection('class').insertOne(newClass);
     if (response.acknowledged ) {
         res.status(201).json(response);
     } else {
         res.status(500).json(response.error || 'Some error occurred while creating Class');
     }
 }
-
-
-
-
 
 classController.updateClass = async (req, res, next) => {
     //#swagger.tags=['Class']
@@ -82,7 +85,8 @@ classController.updateClass = async (req, res, next) => {
         class_description: req.body.class_description,
         max_class_size: req.body.max_class_size
     })
-    const response = await db.getDb().db().collection('class').replaceOne({_id: classId}, update)
+    const db = mongodb.getDb();
+    const response = await db.collection('class').replaceOne({_id: classId}, update)
     if (response.modifiedCount > 0) {
         res.status(204).send();
     } else {
@@ -93,7 +97,8 @@ classController.updateClass = async (req, res, next) => {
 classController.deleteClass = async (req, res, next) => {
     //#swagger.tags=['Class']
     const classId = new ObjectId(req.params.classId);
-    const response = await db.getDb().db().collection('class').deleteOne({_id: classId})
+    const db = mongodb.getDb();
+    const response = await db.collection('class').deleteOne({_id: classId})
     .then(result => {
         if (result.deleteCount === 0) {
             res.status(500).json(

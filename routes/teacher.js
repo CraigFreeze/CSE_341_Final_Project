@@ -1,16 +1,26 @@
-const express = require('express');
-const routes = express.Router();
-// const passport = require('passport');
-
+//Dependencies
+const routes = require('express').Router();
 const teacherController = require('../controllers/teacherController.js')
 
+//Validation and Authentication
 const validation = require("../middleware/validator.js");
+const { isAuthenticated } = require('../middleware/authenticate');
+
+//C
+routes.post('/',isAuthenticated, validation.teacherCreateValidationRules(), validation.validate, teacherController.createTeacher)
+
+//R
+routes.get('/',isAuthenticated, teacherController.getAll())
+routes.get('/:id',isAuthenticated, validation.teacherFindByIdValidationRules(), validation.validate, teacherController.getOne())
+routes.get('/name/:name',isAuthenticated, validation.teacherFindNameValidationRules(), validation.validate, teacherController.getByName())
+
+//U 
+routes.put('/:id',isAuthenticated, validation.teacherUpdateValidationRules(), validation.validate, teacherController.updateTeacher)
+
+//D
+routes.delete('/:id',isAuthenticated, validation.teacherDeleteByIdValidationRules(), validation.validate, teacherController.deleteTeacher)
 
 
-
-routes.get('/', teacherController.getAll())
-routes.get('/:id', validation.teacherFindByIdValidationRules(), validation.validate, teacherController.getOne())
-routes.get('/name/:name', validation.teacherFindNameValidationRules(), validation.validate, teacherController.getByName())
 
 // Pending, waiting for OAuth
 // routes.get('/login', passport.authenticate('github'), (req, res) => {});
@@ -19,8 +29,5 @@ routes.get('/name/:name', validation.teacherFindNameValidationRules(), validatio
 // 	(req, res) => {	
 // 		req.session.user = req.user;
 // 		res.redirect('/')});
-routes.post('/', validation.teacherCreateValidationRules(), validation.validate, teacherController.createTeacher)
-routes.put('/:id', validation.teacherUpdateValidationRules(), validation.validate, teacherController.updateTeacher)
-routes.delete('/:id', validation.teacherDeleteByIdValidationRules(), validation.validate, teacherController.deleteTeacher)
 
 module.exports = routes;

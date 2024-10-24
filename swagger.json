@@ -3,13 +3,12 @@
   "info": {
     "title": "Gradebook Api",
     "description": "Gradebook Api",
-    "version": "1.0.0"
+    "version": "1.2.0"
   },
   "host": "cse-341-final-project-6enz.onrender.com",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "https","http"
   ],
   "paths": {
     "/": {
