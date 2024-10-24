@@ -1,4 +1,4 @@
-const db = require('../data/database');
+const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const gradeController = {};
@@ -6,9 +6,10 @@ const gradeController = {};
 gradeController.getAll = () => {
     //#swagger.tags=['Grade']
     return async (req, res) => {
-        const result = await db.getDb().db().collection('grade').find();
+        const db = mongodb.getDb();
+        const result = await db.collection('grade').find();
         result.toArray().then((contacts) => {
-            res.setHeader('Content-Type', 'application/json');
+            // res.setHeader('Content-Type', 'application/json');
             res.status(200).json(contacts);
         });
     }
@@ -18,7 +19,8 @@ gradeController.getGradeId = () => {
     //#swagger.tags=['Grade']
     return async (req, res) => {
         const id = new ObjectId(req.params.grade)
-        const result = await db.getDb().db().collection('grade').find({ _id: id });
+        const db = mongodb.getDb();
+        const result = await db.collection('grade').find({ _id: id });
         result.toArray().then((grades) => {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).json(grades[0]);
@@ -31,11 +33,12 @@ gradeController.getStudentId = () => {
     try {
         return async (req, res) => {
             const studentId = req.params.studentId;
-            const result = await db.getDb().db().collection('grade').find({ student_id: studentId });
+            const db = mongodb.getDb();
+            const result = await db.collection('grade').find({ student_id: studentId });
             result.toArray().then((grades) => {
                 res.setHeader('Content-Type', 'application/json');
                 var found = [];
-                grades.map((grade) => {if (grade.student_id == studentId) found.push(grade)});
+                grades.map((grade) => { if (grade.student_id == studentId) found.push(grade) });
                 if (found.length > 0) {
                     res.status(200).json(found);
                 } else {
@@ -59,15 +62,16 @@ gradeController.createGrade = async (req, res, next) => {
         assignment_name: req.body.assignment_name,
         grade: req.body.grade,
     }
-    const response = await db.getDb().db().collection('grade').insertOne(newGrade);
-    if (response.acknowledged ) {
+    const db = mongodb.getDb();
+    const result = await db.collection('grade').insertOne(newGrade);
+    if (response.acknowledged) {
         res.status(201).json(response);
     } else {
         res.status(500).json(response.error || 'Some error occurred while creating the grade');
     }
 }
 
-gradeController.updateGrade =  async (req, res, next) => {
+gradeController.updateGrade = async (req, res, next) => {
     //#swagger.tags=['Grade']
     const gradeId = new ObjectId(req.params.id);
     const updatedgrade = {
@@ -75,7 +79,8 @@ gradeController.updateGrade =  async (req, res, next) => {
         assignment_name: req.body.assignment_name,
         grade: req.body.grade,
     };
-    const response = await db.getDb().db().collection('grade').replaceOne({_id: gradeId}, updatedgrade);
+    const db = mongodb.getDb();
+    const result = await db.collection('grade').replaceOne({ _id: gradeId }, updatedgrade);
     if (response.modifiedCount > 0) {
         res.status(204).send();
     } else {
@@ -83,10 +88,11 @@ gradeController.updateGrade =  async (req, res, next) => {
     }
 };
 
-gradeController.deleteGrade =  async (req, res, next) => {
+gradeController.deleteGrade = async (req, res, next) => {
     //#swagger.tags=['Grade']
     const gradeId = new ObjectId(req.params.id);
-    const response = await db.getDb().db().collection('grade').deleteOne({_id: gradeId});
+    const db = mongodb.getDb();
+    const result = await db.collection('grade').deleteOne({ _id: gradeId });
     if (response.deletedCount > 0) {
         res.status(204).send();
     } else {
