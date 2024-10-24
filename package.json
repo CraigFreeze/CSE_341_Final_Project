@@ -14,7 +14,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "body": "^5.1.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "cse_341_final_project": "file:",
@@ -22,7 +21,7 @@
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "express-validator": "^7.2.0",
-    "mongodb": "^6.9.0",
+    "mongodb": "^6.10.0",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12"
   },

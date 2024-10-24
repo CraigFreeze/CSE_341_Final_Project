@@ -11,8 +11,8 @@ routes.post('/',isAuthenticated, validation.classCreateValidationRules(), valida
 
 //R
 routes.get('/', classController.getAll());
-routes.get('/:id',isAuthenticated, classController.getOne());
-routes.get('/subject/:subject',isAuthenticated, validation.classBySubjectValidationRules(), validation.validate, classController.getSubject());
+routes.get('/:id', classController.getOne());
+routes.get('/subject/:subject', validation.classBySubjectValidationRules(), validation.validate, classController.getSubject());
 
 //U
 routes.put('/:classId',isAuthenticated, validation.classUpdateValidationRules(), validation.validate, classController.updateClass);
