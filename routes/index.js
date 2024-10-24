@@ -60,6 +60,7 @@ routes.get("/logout", (req, res, next) => {
 // Catch-all for 404 errors
 routes.use((req, res, next) => {
     const error = new Error('Path Not Found');
+    console.log(req.path)
     error.status = 404;
     next(error);
   });

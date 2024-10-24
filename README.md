@@ -39,6 +39,8 @@ Craig Freeze
 1. Distribute Project information to group including .env information (database URI)
 1. Set up getOne teacher (controller, and route)
 1. Set up getAll teacher (controller, and route)
+1. Trouble shoot authentication errors from production.
+1. Assist in error handling
 
 
 
