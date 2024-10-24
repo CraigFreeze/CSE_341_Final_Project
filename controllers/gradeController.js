@@ -1,4 +1,4 @@
-const db = require('../data/database');
+const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const gradeController = {};
@@ -6,9 +6,10 @@ const gradeController = {};
 gradeController.getAll = () => {
     //#swagger.tags=['Grade']
     return async (req, res) => {
-        const result = await db.getDb().db().collection('grade').find();
+        const db = mongodb.getDb();
+        const result = await db.collection('grade').find();
         result.toArray().then((contacts) => {
-            res.setHeader('Content-Type', 'application/json');
+            // res.setHeader('Content-Type', 'application/json');
             res.status(200).json(contacts);
         });
     }
@@ -62,7 +63,7 @@ gradeController.createGrade = async (req, res, next) => {
         grade: req.body.grade,
     }
     const db = mongodb.getDb();
-    const response = await db.collection('grade').insertOne(newGrade);
+    const result = await db.collection('grade').insertOne(newGrade);
     if (response.acknowledged) {
         res.status(201).json(response);
     } else {
@@ -79,7 +80,7 @@ gradeController.updateGrade = async (req, res, next) => {
         grade: req.body.grade,
     };
     const db = mongodb.getDb();
-    const response = await db.collection('grade').replaceOne({ _id: gradeId }, updatedgrade);
+    const result = await db.collection('grade').replaceOne({ _id: gradeId }, updatedgrade);
     if (response.modifiedCount > 0) {
         res.status(204).send();
     } else {
@@ -91,7 +92,7 @@ gradeController.deleteGrade = async (req, res, next) => {
     //#swagger.tags=['Grade']
     const gradeId = new ObjectId(req.params.id);
     const db = mongodb.getDb();
-    const response = await db.collection('grade').deleteOne({ _id: gradeId });
+    const result = await db.collection('grade').deleteOne({ _id: gradeId });
     if (response.deletedCount > 0) {
         res.status(204).send();
     } else {

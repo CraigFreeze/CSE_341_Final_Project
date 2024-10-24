@@ -1,11 +1,13 @@
 const db = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
-const student = {}; 
+const mongodb = require('../data/database');
+const student = {};
 
 student.getAll = () => {
     //#swagger.tags=['Student']
     return async (req, res) => {
-        const result = await db.getDb().db().collection('student').find();
+        const db = mongodb.getDb();
+        const result = await db.collection('student').find();
         result.toArray().then((contacts) => {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).json(contacts);
@@ -17,7 +19,8 @@ student.getOne = () => {
     //#swagger.tags=['Student']
     return async (req, res) => {
         const id = new ObjectId(req.params.id)
-        const result = await db.getDb().db().collection('student').find({ _id: id });
+        const db = mongodb.getDb();
+        const result = await db.collection('student').find({ _id: id });
         result.toArray().then((contacts) => {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).json(contacts[0]);
@@ -30,11 +33,12 @@ student.findByFirstName = () => {
     try {
         return async (req, res) => {
             const firstName = req.params.first_name.toLowerCase();
-            const result = await db.getDb().db().collection('student').find();
+            const db = mongodb.getDb();
+            const result = await db.collection('student').find();
             result.toArray().then((contacts) => {
                 res.setHeader('Content-Type', 'application/json');
                 var found = [];
-                contacts.map((contact) => {if (contact.first_name.toLowerCase() == firstName) found.push(contact)});
+                contacts.map((contact) => { if (contact.first_name.toLowerCase() == firstName) found.push(contact) });
                 if (found.length > 0) {
                     res.status(200).json(found);
                 } else {
@@ -52,11 +56,12 @@ student.findByLastName = () => {
     try {
         return async (req, res) => {
             const lastName = req.params.last_name.toLowerCase();
-            const result = await db.getDb().db().collection('student').find();
+            const db = mongodb.getDb();
+            const result = await db.collection('student').find();
             result.toArray().then((contacts) => {
                 res.setHeader('Content-Type', 'application/json');
                 var found = [];
-                contacts.map((contact) => {if (contact.last_name.toLowerCase() == lastName) found.push(contact)});
+                contacts.map((contact) => { if (contact.last_name.toLowerCase() == lastName) found.push(contact) });
                 if (found.length > 0) {
                     res.status(200).json(found);
                 } else {
@@ -84,8 +89,9 @@ student.createStudent = async (req, res, next) => {
         grade_level: req.body.grade_level,
         home_room_teacher: req.body.home_room_teacher,
     }
-    const response = await db.getDb().db().collection('student').insertOne(newStudent);
-    if (response.acknowledged ) {
+    const db = mongodb.getDb();
+    const result = await db.collection('student').insertOne(newStudent);
+    if (response.acknowledged) {
         res.status(201).json(response);
     } else {
         res.status(500).json(response.error || 'Some error occurred while creating Student');
@@ -99,7 +105,7 @@ student.updateStudent = async (req, res, next) => {
     //#swagger.tags=['Student']
     const studentId = new ObjectId(req.params.studentId);
     if (!req.body) {
-        return res.status(400).send({message: 'Data to update cannot be empty'});
+        return res.status(400).send({ message: 'Data to update cannot be empty' });
     }
     const update = ({
 
@@ -113,27 +119,29 @@ student.updateStudent = async (req, res, next) => {
 
 
     })
-    const response = await db.getDb().db().collection('student').replaceOne({_id: studentId}, update)
+    const db = mongodb.getDb();
+    const result = await db.collection('student').replaceOne({ _id: studentId }, update)
     if (response.modifiedCount > 0) {
         res.status(204).send();
     } else {
-        res.status(500).send({message: err.message || `Error updating Student with Id: ${studentId}`})
+        res.status(500).send({ message: err.message || `Error updating Student with Id: ${studentId}` })
     }
 }
 
 student.deleteStudent = async (req, res, next) => {
     //#swagger.tags=['Student']
     const studentId = new ObjectId(req.params.studentId);
-    const response = await db.getDb().db().collection('student').deleteOne({_id: studentId})
-    .then(result => {
-        if (result.deleteCount === 0) {
-            res.status(500).json(
-                response.error || `Cannot delete Student with id:${studentId}. Maybe Student was not found`
-            )
-            // return res.json('Cannot delete Car');
-        }
-        res.status(204).send();
-    })
+    const db = mongodb.getDb();
+    const result = await db.collection('student').deleteOne({ _id: studentId })
+        .then(result => {
+            if (result.deleteCount === 0) {
+                res.status(500).json(
+                    response.error || `Cannot delete Student with id:${studentId}. Maybe Student was not found`
+                )
+                // return res.json('Cannot delete Car');
+            }
+            res.status(204).send();
+        })
 }
 
 module.exports = student;
