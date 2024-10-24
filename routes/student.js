@@ -11,10 +11,10 @@ const { isAuthenticated } = require('../middleware/authenticate');
 routes.post('/',isAuthenticated, validation.studentCreateValidationRules(), validation.validate, studentController.createStudent)
 
 //R
-routes.get('/',isAuthenticated, studentController.getAll())
-routes.get('/:id',isAuthenticated, validation.studentFindByIdValidationRules(), validation.validate, studentController.getOne())
-routes.get('/findByFirstName/:first_name',isAuthenticated, validation.studentFindFirstNameValidationRules(), validation.validate, studentController.findByFirstName())
-routes.get('/findByLastName/:last_name',isAuthenticated, validation.studentFindLastNameValidationRules(), validation.validate, studentController.findByLastName())
+routes.get('/', studentController.getAll())
+routes.get('/:id', validation.studentFindByIdValidationRules(), validation.validate, studentController.getOne())
+routes.get('/findByFirstName/:first_name', validation.studentFindFirstNameValidationRules(), validation.validate, studentController.findByFirstName())
+routes.get('/findByLastName/:last_name', validation.studentFindLastNameValidationRules(), validation.validate, studentController.findByLastName())
 
 //U
 routes.put('/:studentId',isAuthenticated, validation.studentUpdateValidationRules(), validation.validate, studentController.updateStudent)
