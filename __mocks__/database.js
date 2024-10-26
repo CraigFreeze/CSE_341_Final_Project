@@ -1,4 +1,3 @@
-// __mocks__/database.js
 const { MongoClient } = require('mongodb');
 
 const mockDb = {

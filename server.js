@@ -58,7 +58,7 @@ app.use('/', require('./routes/index.js'));
 
 
 
-// Error handling
+// // Error handling
 app.use((err, req, res, next) => {
   console.log(err)
   err.statusCode = err.statusCode || 500;
@@ -68,9 +68,11 @@ app.use((err, req, res, next) => {
   });
 });
 
+
 // Error handler 2
 app.use((req, res, next) => {
   res.status(404).json({ message: "Route not found" });
 });
+
 
 module.exports = app;
