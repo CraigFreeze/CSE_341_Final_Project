@@ -1,19 +1,16 @@
 const request = require('supertest');
 const app = require('../server.js');
-const dbb = require('../data/database.js')
+const dbb = require('../data/database.js');
 
 describe('Server and API Endpoints', () => {
-    beforeAll((done) => {
-        dbb.initDb((err) => {
-            if (err) return done(err);
-            app.listen(done); // Start server manually
-        });
-    });
+    // beforeAll(async () => {
+    //     dbb.initDb(); // Ensure database is initialized
+    // });
 
-    afterAll(async () => {
-        dbb.closeDb(); // Close database connection
-        // app.close();  // Close server to free up the port
-    });
+    // afterAll(async () => {
+    //     dbb.closeDb(); // Close database connection
+    //     // app.close();  // Close server to free up the port
+    // });
 
     test('should respond with 404 for unknown routes', async () => {
         const res = await request(app).get('/unknown-route');

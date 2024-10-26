@@ -38,7 +38,8 @@ app.use(bodyParser.json());
 mongodb.initDb((err, db) => {
   if (err) {
     console.log(err);
-  } else {
+  } 
+  else {
     app.listen(port, () => {
       console.log(`Connected to DB and listening on port ${port}`);
     });

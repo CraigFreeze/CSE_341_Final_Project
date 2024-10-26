@@ -3,6 +3,8 @@
 View package.json to view requried nodeDependecies. If you need access to the environment Variables for this project, please reach out to Craig Freeze
 
 ```bash
+npm install jest
+npm install supertest
 npm install body
 npm install body-parser
 npm install dotenv
@@ -59,6 +61,8 @@ Arnold Sujan Katru
 6. Update Db Initialization in controllers 
 7. Implement authentication in routes
 8. Organize CRUD in routes 
+9. Adided Swagger and Server Tests
+10.Aided in Fixing Production code in render
 
 
 Jan Zander
