@@ -35,6 +35,15 @@ afterAll(async () => {
   await mongoServer.stop();
 });
 
+const swaggerDefinition = require('../swagger.json');
+
+describe('Swagger API', () => {
+  it('should have a valid definition', () => {
+    expect(swaggerDefinition).toBeDefined();
+    expect(swaggerDefinition.paths).toBeDefined(); // Ensure paths are present
+  });
+});
+
 describe('GET /class', () => {
   test('should retrieve all classes', async () => {
     const response = await request(app).get('/class');
