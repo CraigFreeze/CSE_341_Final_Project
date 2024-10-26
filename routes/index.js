@@ -58,10 +58,11 @@ routes.get("/logout", (req, res, next) => {
 });
 
 // Catch-all for 404 errors
-routes.use((req, res, next) => {
-    const error = new Error('Path Not Found');
-    error.status = 404;
-    next(error);
-  });
+routes.use((req, res) => {
+  if (process.env.NODE_ENV !== 'test') {
+      console.log(req.path); // Only log if not in test environment
+  }
+  res.status(404).json({ message: "Route not found" }); // Respond directly with 404 and JSON message
+});
 
 module.exports = routes;

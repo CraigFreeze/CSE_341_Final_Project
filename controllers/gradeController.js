@@ -1,4 +1,5 @@
 const mongodb = require('../data/database');
+const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const gradeController = {};
@@ -109,7 +110,7 @@ gradeController.createGrade = async (req, res) => {
 <<<<<<< HEAD
     }
     const db = mongodb.getDb();
-    const response = await db.collection('grade').insertOne(newGrade);
+    const result = await db.collection('grade').insertOne(newGrade);
     if (response.acknowledged) {
         res.status(201).json(response);
     } else {
@@ -162,7 +163,7 @@ gradeController.deleteGrade = async (req, res, next) => {
     //#swagger.tags=['Grade']
     const gradeId = new ObjectId(req.params.id);
     const db = mongodb.getDb();
-    const response = await db.collection('grade').deleteOne({ _id: gradeId });
+    const result = await db.collection('grade').deleteOne({ _id: gradeId });
     if (response.deletedCount > 0) {
         res.status(204).send();
     } else {
