@@ -110,6 +110,16 @@ Josue Sinaca Gomez
 1. DELETE /class/:classId
 
 
-Kami Smith 
-1.
-1.
+Kami Smith
+1. Brainstormed idea for our Gradebook Project and collections
+2. Aided in the process of finalizing GET endpoints
+3. Aided in the process of finalizing POST endpoints
+4. Aided in fixing authentication points
+5. Unit test for GET all classes
+6. Unit test for GET single class
+7. Unit test for GET all grades
+8. Unit test for GET single grade
+9. Unit test for GET all students
+10. Unit test for GET single student
+11. Unit test for GET all teachers
+12. Unit test for GET single teacher
