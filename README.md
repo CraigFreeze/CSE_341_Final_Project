@@ -48,6 +48,8 @@ Craig Freeze
 
 Arnold Sujan Katru
 - [Youtube Link Week 5 Contribution Documentation ](https://youtu.be/uc4x-Ytr1Rc).
+- [Youtube Link Week 6 Contribution Documentation ](https://youtu.be/X7JxcqYG4L0).
+
 ```
  Main (branch)
   |- arnold (branch for local machine)
@@ -62,7 +64,7 @@ Arnold Sujan Katru
 7. Implement authentication in routes
 8. Organize CRUD in routes 
 9. Adided Swagger and Server Tests
-10.Aided in Fixing Production code in render
+10. Aided in Fixing Production code in render
 
 
 Jan Zander
