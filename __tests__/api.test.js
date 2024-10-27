@@ -38,7 +38,7 @@ afterAll(async () => {
 
 describe('GET /class', () => {
   test('should retrieve all classes', async () => {
-    const response = await request(app).get('/class');
+    const response = await request(app).get('/class/');
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
   });
@@ -46,7 +46,7 @@ describe('GET /class', () => {
 
 describe('GET /grade', () => {
   test('should retrieve all grades', async () => {
-    const response = await request(app).get('/grade');
+    const response = await request(app).get('/grade/');
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
   });
@@ -54,7 +54,7 @@ describe('GET /grade', () => {
 
 describe('GET /student', () => {
   test('should retrieve all students', async () => {
-    const response = await request(app).get('/student');
+    const response = await request(app).get('/student/');
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
   });
@@ -62,7 +62,7 @@ describe('GET /student', () => {
 
 describe('GET /teacher', () => {
   test('should retrieve all teachers', async () => {
-    const response = await request(app).get('/teacher');
+    const response = await request(app).get('/teacher/');
     expect(response.status).toBe(200);
     expect(response.body).toBeInstanceOf(Array);
   });

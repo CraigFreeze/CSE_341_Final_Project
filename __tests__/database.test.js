@@ -12,9 +12,9 @@ describe('Database Connection', () => {
     });
 
     test('should initialize the database successfully', (done) => {
-        initDb((err, db) => {
+        getDb((err, _db) => {
             expect(err).toBeNull();
-            expect(db).toBeDefined();
+            expect(_db).toBeDefined();
             done();
             // closeDb;
         });

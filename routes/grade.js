@@ -12,9 +12,6 @@ routes.post('/', isAuthenticated, validation.gradeCreateValidationRules(), valid
 
 //R
 // routes.get('/', gradeController.getOne(''))
-routes.get('/', gradeController.getAll());
-routes.get('/student/:studentId', validation.gradeFindByStudentIdValidationRules(), validation.validate, gradeController.getStudentId());
-routes.get('/:grade', validation.gradeFindByIdValidationRules(), validation.validate, gradeController.getGradeId());
 routes.get('/',isAuthenticated, gradeController.getAll());
 routes.get('/student/:studentId',isAuthenticated, validation.gradeFindByStudentIdValidationRules(), validation.validate, gradeController.getStudentId());
 routes.get('/:grade',isAuthenticated, validation.gradeFindByIdValidationRules(), validation.validate, gradeController.getGradeId());
