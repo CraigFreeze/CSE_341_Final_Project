@@ -1,5 +1,5 @@
 #GET classes
-# GET http://localhost:3000/class/
+GET http://localhost:3000/class/
 
 # GET class
 # GET http://localhost:3000/class/67099506204dafb2be099394
