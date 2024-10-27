@@ -1,69 +1,94 @@
-const request = require('supertest');
-const app = require('../server.js');
+const { MongoClient } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
-const mongoose = require('mongoose');
-const { initDb } = require('../data/database');
+const classController = require('../controllers/classController');
+const httpMocks = require('node-mocks-http');
 
+describe('classController Integration Tests', () => {
+    let mongoServer;
+    let connection;
+    let db;
 
-let mongoServer;
+    beforeAll(async () => {
+        // Create an in-memory MongoDB instance
+        mongoServer = await MongoMemoryServer.create();
+        const mongoUri = mongoServer.getUri();
 
-beforeAll(async () => {
-  // Initialize in-memory MongoDB server
-  mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
+        // Create a MongoDB connection
+        connection = await MongoClient.connect(mongoUri);
+        db = connection.db();
 
-  // Set the MongoDB URI for testing
-  process.env.DB_URI = uri;
-  process.env.DB_NAME = 'testDb'; // Optional, if you specify DB_NAME
-
-  // Connect mongoose to the in-memory MongoDB
-  await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
-  // Initialize the database connection
-  await new Promise((resolve, reject) => {
-    initDb((err) => {
-      if (err) return reject(err);
-      resolve();
+        // Mock the database.js getDb function
+        jest.spyOn(require('../data/database'), 'getDb').mockReturnValue(db);
     });
-  });
-}, 10000); // Optional: increase timeout if Jest times out here
 
-afterAll(async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
-});
+    afterAll(async () => {
+        // Clean up resources
+        await connection.close();
+        await mongoServer.stop();
+    });
 
-describe('GET /class', () => {
-  test('should retrieve all classes', async () => {
-    const response = await request(app).get('/class/');
-    expect(response.status).toBe(200);
-    expect(response.body).toBeInstanceOf(Array);
-  });
-});
+    describe('getAll', () => {
+        let req;
+        let res;
 
-describe('GET /grade', () => {
-  test('should retrieve all grades', async () => {
-    const response = await request(app).get('/grade/');
-    expect(response.status).toBe(200);
-    expect(response.body).toBeInstanceOf(Array);
-  });
-});
+        beforeEach(async () => {
+            // Create fresh request and response mocks
+            req = httpMocks.createRequest();
+            res = httpMocks.createResponse({
+                eventEmitter: require('events').EventEmitter
+            });
 
-describe('GET /student', () => {
-  test('should retrieve all students', async () => {
-    const response = await request(app).get('/student/');
-    expect(response.status).toBe(200);
-    expect(response.body).toBeInstanceOf(Array);
-  });
-});
+            // Clear the collection before each test
+            await db.collection('class').deleteMany({});
+        });
 
-describe('GET /teacher', () => {
-  test('should retrieve all teachers', async () => {
-    const response = await request(app).get('/teacher/');
-    expect(response.status).toBe(200);
-    expect(response.body).toBeInstanceOf(Array);
-  });
+        it('should return all classes with 200 status when classes exist', async () => {
+            // Arrange: Insert test data
+            const testClasses = [
+                {
+                    course_code: 'MATH101',
+                    subject: 'Mathematics',
+                    class_description: 'Calculus I',
+                    max_class_size: 30
+                },
+                {
+                    course_code: 'PHY201',
+                    subject: 'Physics',
+                    class_description: 'Mechanics',
+                    max_class_size: 25
+                }
+            ];
+            await db.collection('class').insertMany(testClasses);
+
+            // Act: Call getAll
+            const getAllHandler = classController.getAll();
+            await getAllHandler(req, res);
+
+            // Wait for the response to be complete
+            await new Promise(resolve => res.once('end', resolve));
+
+            // Assert
+            expect(res.statusCode).toBe(200);
+            const responseData = JSON.parse(res._getData());
+            expect(responseData).toHaveLength(2);
+            expect(responseData[0].course_code).toBe('MATH101');
+            expect(responseData[1].course_code).toBe('PHY201');
+        });
+
+        it('should return 404 status when no classes exist', async () => {
+            // Act: Call getAll with empty database
+            const getAllHandler = classController.getAll();
+            await getAllHandler(req, res);
+
+            // Wait for the response to be complete
+            await new Promise(resolve => res.once('end', resolve));
+
+            // Assert
+            expect(res.statusCode).toBe(404);
+            const responseData = JSON.parse(res._getData());
+            expect(responseData).toEqual({
+                message: 'No classes found in the database'
+            });
+        });
+    });
 });

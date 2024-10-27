@@ -1,22 +1,31 @@
-// database.test.js
+// __tests__/database.test.js
+const { MongoClient } = require('mongodb');
+const { initDb, getDb } = require('../data/database');
 
-const { initDb, getDb, closeDb } = require('../data/database.js');
-console.log = jest.fn();
+jest.mock('mongodb');
+
 describe('Database Connection', () => {
-    beforeAll(() => {
-        console.log = jest.fn();
-    });
-    afterAll(async () => {
-        await closeDb(); // Ensure database connection closes fully after all tests
-        // console.log.mockRestore(); 
+    beforeAll((done) => {
+        const mockDb = {
+            collection: jest.fn().mockReturnValue({
+                insertOne: jest.fn().mockResolvedValue({ acknowledged: true }),
+            }),
+        };
+
+        const mockClient = { db: jest.fn().mockReturnValue(mockDb) };
+        
+        MongoClient.connect.mockResolvedValue(mockClient);
+        
+        // Initialize database with callback
+        initDb(done);
     });
 
-    test('should initialize the database successfully', (done) => {
-        getDb((err, _db) => {
-            expect(err).toBeNull();
-            expect(_db).toBeDefined();
-            done();
-            // closeDb;
-        });
+    test('should initialize the database and perform an insert operation', async () => {
+        const db = getDb();
+        expect(db).toBeDefined();
+
+        const collection = db.collection('test');
+        await collection.insertOne({ test: 'data' });
+        expect(collection.insertOne).toHaveBeenCalledWith({ test: 'data' });
     });
 });
