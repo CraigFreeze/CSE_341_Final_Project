@@ -48,7 +48,7 @@ Craig Freeze
 
 Arnold Sujan Katru
 - [Youtube Link Week 5 Contribution Documentation ](https://youtu.be/uc4x-Ytr1Rc).
-- [Youtube Link Week 6 Contribution Documentation ](https://youtu.be/X7JxcqYG4L0).
+- [Youtube Link Week 6 Contribution Documentation ](https://youtu.be/988G-BFdjrQ?si=GQYgaDz7EJj0TGzl).
 
 ```
  Main (branch)
