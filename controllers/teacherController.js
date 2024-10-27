@@ -1,5 +1,4 @@
 const mongodb = require('../data/database');
-const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 // Corrected getAll method
