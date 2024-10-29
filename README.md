@@ -24,7 +24,7 @@ npm install swagger-ui-express --save-dev
 
 - [Github](https://github.com/CraigFreeze/CSE_341_Final_Project).
 - [Render](https://cse-341-final-project-6enz.onrender.com).
-- [Youtube](https://youtube.com).
+- [Youtube](https://youtu.be/OWeH1_UWRa0).
 
 ## Individual Contributions
 
