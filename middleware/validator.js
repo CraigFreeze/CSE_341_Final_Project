@@ -131,7 +131,7 @@ validation.gradeUpdateValidationRules = () => {
 validation.gradeDeleteByIdValidationRules = () => {
     return [
         // param("classId").matches(/^[0-9a-fA-F]{24}$/).withMessage("Invalid ID format. Must be a 24-character hex string (MongoDB ObjectId)")
-        param("classId").isMongoId().withMessage("Invalid ID format. Must be a valid MongoDB ObjectId")
+        param("id").isMongoId().withMessage("Invalid ID format. Must be a valid MongoDB ObjectId")
     ];
 };
 
