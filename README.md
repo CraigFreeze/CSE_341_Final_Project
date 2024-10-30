@@ -43,6 +43,8 @@ Craig Freeze
 1. Set up getAll teacher (controller, and route)
 1. Trouble shoot authentication errors from production.
 1. Assist in error handling
+1. Trouble Shoot Testing
+1. Fix Additional Render Error
 
 
 
