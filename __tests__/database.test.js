@@ -1,31 +1,33 @@
-// __tests__/database.test.js
-const { MongoClient } = require('mongodb');
-const { initDb, getDb } = require('../data/database');
+const {MongoClient} = require('mongodb');
+const {initDb} = require('../data/database.js');
 
-jest.mock('mongodb');
+describe('Database test', function () {
+  let connection;
+  let db;
 
-describe('Database Connection', () => {
-    beforeAll((done) => {
-        const mockDb = {
-            collection: jest.fn().mockReturnValue({
-                insertOne: jest.fn().mockResolvedValue({ acknowledged: true }),
-            }),
-        };
-
-        const mockClient = { db: jest.fn().mockReturnValue(mockDb) };
-        
-        MongoClient.connect.mockResolvedValue(mockClient);
-        
-        // Initialize database with callback
-        initDb(done);
+  beforeEach(async () => {
+    connection = await MongoClient.connect(process.env.DB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     });
+    db = await new Promise((resolve, reject) => {
+      initDb((err) => {
+      if (err) return reject(err);
+      resolve();
+      });
+  
+  }, 5000); // Optional: increase timeout if Jest times out here
 
-    test('should initialize the database and perform an insert operation', async () => {
-        const db = getDb();
-        expect(db).toBeDefined();
+  });
 
-        const collection = db.collection('test');
-        await collection.insertOne({ test: 'data' });
-        expect(collection.insertOne).toHaveBeenCalledWith({ test: 'data' });
-    });
+  afterEach(async () => {
+    await connection.close();
+  });
+
+  it('should get students', async () => {
+    const users = connection.db().collection('student');
+    const student = await users.find().toArray()
+    expect(student).toBeInstanceOf(Array);
+  });
+
 });

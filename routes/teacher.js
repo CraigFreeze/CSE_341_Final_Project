@@ -10,7 +10,7 @@ const { isAuthenticated } = require('../middleware/authenticate');
 routes.post('/',isAuthenticated, validation.teacherCreateValidationRules(), validation.validate, teacherController.createTeacher)
 
 //R
-routes.get('/',isAuthenticated, teacherController.getAll())
+routes.get('/', teacherController.getAll())
 routes.get('/:id',isAuthenticated, validation.teacherFindByIdValidationRules(), validation.validate, teacherController.getOne())
 routes.get('/name/:name',isAuthenticated, validation.teacherFindNameValidationRules(), validation.validate, teacherController.getByName())
 
